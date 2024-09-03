@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="bool">
+            <name>active</name>
+            <label>Plugin is active</label>
+            <label lang="de-DE">Plugin ist aktiv</label>
+        </input-field>
+
+        <input-field type="bool">
+            <name>voteOwnReview</name>
+            <copyable>true</copyable>
+            <label>Customer can not vote own review</label>
+            <label lang="de-DE">Kunde kann eigene Bewertung nicht bewerten</label>
+        </input-field>
+    </card>
+</config>

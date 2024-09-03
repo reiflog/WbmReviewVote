@@ -1,0 +1,40 @@
+{
+  "name": "wbm/review-vote",
+  "description": "Enables customers to vote product reviews",
+  "type": "shopware-platform-plugin",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Nicolas Golfier"
+    }
+  ],
+  "require": {
+    "shopware/core": "~6.6"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "WbmReviewVote\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "WbmReviewVote\\WbmReviewVote",
+    "copyright": "Nicolas Golfier",
+    "label": {
+      "de-DE": "WbmReviewVote",
+      "en-GB": "WbmReviewVote"
+    },
+    "description": {
+      "de-DE": "Enables customers to vote product reviews",
+      "en-GB": "Enables customers to vote product reviews"
+    },
+    "manufacturerLink": {
+      "de-DE": "https://acme.org",
+      "en-GB": "https://acme.org"
+    },
+    "supportLink": {
+      "de-DE": "https://acme.org",
+      "en-GB": "https://acme.org"
+    }
+  }
+}

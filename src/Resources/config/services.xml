@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="WbmReviewVote\Content\ReviewVote\ReviewVoteDefinition">
+            <tag name="shopware.entity.definition" entity="wbm_review_vote" />
+        </service>
+
+        <service id="WbmReviewVote\Content\ProductReview\ProductReviewExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="WbmReviewVote\Core\Content\Product\SalesChannel\Review\ProductReviewRoute" decorates="Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewRoute">
+            <argument type="service" id="WbmReviewVote\Core\Content\Product\SalesChannel\Review\ProductReviewRoute.inner" />
+            <argument type="service" id="WbmReviewVote\Service\ReviewVoteService"/>
+        </service>
+
+        <service id="WbmReviewVote\Controller\StoreApi\ReviewVoteSaveRoute" public="true">
+            <argument type="service" id="wbm_review_vote.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator"/>
+            <argument type="service" id="product_review.repository"/>
+            <argument type="service" id="WbmReviewVote\Service\ReviewVoteService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="WbmReviewVote\Service\ReviewVoteService">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="WbmReviewVote\Controller\Storefront\ReviewVoteController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+            <argument type="service" id="WbmReviewVote\Controller\StoreApi\ReviewVoteSaveRoute"/>
+        </service>
+    </services>
+
+</container>

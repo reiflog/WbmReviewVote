@@ -1,0 +1,35 @@
+{% sw_extends '@Storefront/storefront/component/review/review-item.html.twig' %}
+
+{% block component_review_item_comment %}
+    {{ parent() }}
+
+    {% block component_review_item_vote %}
+        {% if review.extensions.voteCounter and config('WbmReviewVote.config.active') %}
+            {% set reviewVoteCounter = review.extensions.voteCounter %}
+            <form action="{{ path('frontend.review-vote.vote', {productReviewId: review.id}) }}" method="post" data-review-vote-form>
+                <input type="hidden" name="reviewId" value="{{ review.id }}" />
+                <button {% if not context.customerId or (config('WbmReviewVote.config.voteOwnReview') and review.customerId == context.customerId) %}disabled{% endif %}
+                        data-class-active="btn btn-sm btn-success"
+                        data-class-inactive="btn btn-sm btn-outline-success"
+                        type="submit"
+                        name="type"
+                        value="upvote"
+                        class="btn btn-sm {% if reviewVoteCounter.customerVoteType == "upvote" %}btn-success{% else %}btn-outline-success{% endif %}">
+                    Like (<span>{{ reviewVoteCounter.upvotes }}</span>)
+                </button>
+                <button {% if not context.customerId or (config('WbmReviewVote.config.voteOwnReview') and review.customerId == context.customerId) %}disabled{% endif %}
+                        data-class-active="btn btn-sm btn-danger"
+                        data-class-inactive="btn btn-sm btn-outline-danger"
+                        type="submit"
+                        name="type"
+                        value="downvote"
+                        class="btn btn-sm {% if reviewVoteCounter.customerVoteType == "downvote" %}btn-danger{% else %}btn-outline-danger{% endif %}">
+                    Dislike (<span>{{ reviewVoteCounter.downvotes }}</span>)
+                </button>
+            </form>
+        {% endif %}
+    {% endblock %}
+
+
+
+{% endblock %}
